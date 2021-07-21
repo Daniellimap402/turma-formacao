@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+
+    <changeSet id="20210719172200-1" author="daniel.pinheiro">
+        <createTable tableName="tb_anexo">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="file" type="text">
+            </column>
+            <column name="file_name" type="varchar(255)">
+            </column>
+            <column name="tarefa_id" type="bigint">
+            </column>
+            <column name="uu_id" type="varchar(255)">
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

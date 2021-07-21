@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+
+    <changeSet id="20210719172200-1" author="daniel.pinheiro">
+        <createTable tableName="tb_tarefa">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="nome" type="varchar(255)">
+            </column>
+            <column name="dt_conclusao" type="date">
+            </column>
+            <column name="dt_inicio" type="date">
+            </column>
+            <column name="status" type="varchar(20)">
+            </column>
+            <column name="responsavel_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20210719172200-2" author="daniel.pinheiro">
+        <addForeignKeyConstraint baseTableName="tb_anexo" baseColumnNames="tarefa_id" constraintName="fk_tarefa_anexo"
+                                 referencedTableName="tb_tarefa"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="20210719172200-3" author="daniel.pinheiro">
+        <addForeignKeyConstraint baseTableName="tb_tarefa" baseColumnNames="responsavel_id"
+                                 constraintName="fk_tarefa_responsavel"
+                                 referencedTableName="tb_responsavel"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>
