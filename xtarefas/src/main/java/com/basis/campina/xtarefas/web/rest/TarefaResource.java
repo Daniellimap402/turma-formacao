@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/tarefas/")
+@RequestMapping("/api/tarefas")
 @RequiredArgsConstructor
 public class TarefaResource {
 
@@ -25,7 +25,7 @@ public class TarefaResource {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TarefaDTO> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(this.service.buscarPorId(id));
     }

@@ -6,6 +6,7 @@ import io.minio.GetObjectArgs;
 import io.minio.GetObjectResponse;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
+import io.minio.RemoveObjectArgs;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.io.IOUtils;
@@ -40,6 +41,12 @@ public class DocumentoService {
                 .object(uuId)
                 .build());
         return new DocumentoDTO(uuId, IOUtils.toString(file, StandardCharsets.UTF_8.toString()));
+    }
+
+    @SneakyThrows
+    public void removeDocument(String uuId) {
+        RemoveObjectArgs objectArgs = RemoveObjectArgs.builder().bucket(applicationProperties.getBucket()).object(uuId).build();
+        client.removeObject(objectArgs);
     }
 
 }
