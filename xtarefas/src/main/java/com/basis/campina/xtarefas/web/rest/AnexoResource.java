@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.websocket.server.PathParam;
+
 @RestController
-@RequestMapping("/api/anexos/")
+@RequestMapping("/api/anexos")
 @RequiredArgsConstructor
 public class AnexoResource {
 
@@ -25,15 +28,20 @@ public class AnexoResource {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<AnexoDTO> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(this.service.buscarPorId(id));
     }
 
-    @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        this.service.deletar(id);
+    @DeleteMapping()
+    public ResponseEntity<Void> deletar(@RequestParam("uuId") String uuId) {
+        this.service.deletar(uuId);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<AnexoDTO> buscar(@RequestParam("uuId") String uuId) {
+        return this.service.buscar(uuId);
     }
 
 }

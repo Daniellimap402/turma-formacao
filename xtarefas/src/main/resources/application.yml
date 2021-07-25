@@ -22,3 +22,23 @@ spring:
 application:
   feign:
     url-documents: http://localhost:8081
+
+
+    spring:
+      data:
+        jest:
+          uri: http://elasticsearch-cliente.elasticsearch:9200
+      datasource:
+        password: $ESi&HoJbhd0
+        url: jdbc:sqlserver://sqldes.basis.intern:1433;database=SICASE
+        username: app_sicase
+      elasticsearch:
+        rest:
+          uris: http://elasticsearch-cliente.elasticsearch:9200
+      profiles:
+        active: prod,swagger,local
+      redis:
+        host: redis-headless.redis
+        port: 6379
+      liquibase:
+        drop-first: true
