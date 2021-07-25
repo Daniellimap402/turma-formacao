@@ -8,3 +8,7 @@ services:
     extends:
       service: minio
       file: minio.yml
+  elastic-xtarefas:
+    extends:
+      service: elasticsearch
+      file: elasticsearch.yml
