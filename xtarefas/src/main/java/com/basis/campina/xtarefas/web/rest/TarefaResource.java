@@ -1,8 +1,12 @@
 package com.basis.campina.xtarefas.web.rest;
 
+import com.basis.campina.xtarefas.domain.elasticsearch.TarefaDocument;
 import com.basis.campina.xtarefas.service.TarefaService;
 import com.basis.campina.xtarefas.service.dto.TarefaDTO;
+import com.basis.campina.xtarefas.service.filter.TarefaFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +38,12 @@ public class TarefaResource {
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         this.service.deletar(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<Page<TarefaDocument>> search(@RequestBody TarefaFilter filter, Pageable pageable) {
+        Page<TarefaDocument> documents = service.search(filter, pageable);
+        return ResponseEntity.ok(documents);
     }
 
 }

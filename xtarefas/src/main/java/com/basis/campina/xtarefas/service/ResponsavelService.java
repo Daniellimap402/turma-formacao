@@ -31,7 +31,7 @@ public class ResponsavelService {
     public ResponsavelDTO salvar(ResponsavelDTO dto){
         Responsavel responsavel = this.repository.save(mapper.toEntity(dto));
         eventPublisher.publishEvent(new ResponsavelEvent(responsavel.getId()));
-        return null;
+        return mapper.toDto(responsavel);
     }
 
     public ResponsavelDTO buscarPorId(Long id){

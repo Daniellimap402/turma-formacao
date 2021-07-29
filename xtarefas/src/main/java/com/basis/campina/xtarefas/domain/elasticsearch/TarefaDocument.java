@@ -33,13 +33,22 @@ public class TarefaDocument extends BaseDocument {
 
     @MultiField(mainField = @Field(type = FieldType.Text, store = true, analyzer = TRIM_CASE_INSENSITIVE, fielddata = true),
             otherFields = {@InnerField(suffix = SORT, type = FieldType.Text, store = true, analyzer = TRIM_CASE_INSENSITIVE, fielddata = true)})
-    private StatusEnum status;
+    private String status;
 
-    public TarefaDocument(Long id, String nome, LocalDate dataConclusao, LocalDate dataInicio, StatusEnum status) {
+    @MultiField(mainField = @Field(type = FieldType.Text, store = true, analyzer = TRIM_CASE_INSENSITIVE, fielddata = true),
+            otherFields = {@InnerField(suffix = SORT, type = FieldType.Text, store = true, analyzer = TRIM_CASE_INSENSITIVE, fielddata = true)})
+    private String nomeAnexos;
+
+    @MultiField(mainField = @Field(type = FieldType.Text, store = true, analyzer = TRIM_CASE_INSENSITIVE, fielddata = true),
+            otherFields = {@InnerField(suffix = SORT, type = FieldType.Text, store = true, analyzer = TRIM_CASE_INSENSITIVE, fielddata = true)})
+    private String nomeResponsavel;
+
+    public TarefaDocument(Long id, String nome, LocalDate dataConclusao, LocalDate dataInicio, StatusEnum status, String nomeResponsavel) {
         this.id = id;
         this.nome = nome;
         this.dataConclusao = converterData(dataConclusao);
         this.dataInicio = converterData(dataInicio);
-        this.status = status;
+        this.status = status.getValue();
+        this.nomeResponsavel = nomeResponsavel;
     }
 }

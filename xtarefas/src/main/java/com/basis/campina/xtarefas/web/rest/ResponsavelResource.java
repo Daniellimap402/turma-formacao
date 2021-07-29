@@ -35,14 +35,14 @@ public class ResponsavelResource {
         return ResponseEntity.ok(this.service.buscarPorId(id));
     }
 
-    @DeleteMapping("/deletar/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         this.service.deletar(id);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/search")
-    public ResponseEntity<Page<ResponsavelDocument>> search(@RequestBody ResponsavelFilter filter, Pageable pageable){
+    public ResponseEntity<Page<ResponsavelDocument>> search(@RequestBody ResponsavelFilter filter, Pageable pageable) {
         Page<ResponsavelDocument> documents = service.search(filter, pageable);
         return ResponseEntity.ok(documents);
     }

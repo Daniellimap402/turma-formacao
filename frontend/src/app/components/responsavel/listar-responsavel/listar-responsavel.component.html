@@ -1,0 +1,36 @@
+<p-table [value]="responsaveis.content" #tabela (onLazyLoad)="buscarResponsaveis(query)" [lazy]="true" dataKey="id"
+    [rowHover]="true" [rows]="10"
+    currentPageReportTemplate="Showing {first} to {{responsaveis.numberOfElements}} of {totalRecords} entries"
+    [showCurrentPageReport]="true" [paginator]="true" [totalRecords]="responsaveis.totalElements"
+    styleClass="p-datatable-responsive-demo">
+    <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+            <h5 class="p-m-0">Responsaveis</h5>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" #input (keydown.enter)="buscarResponsaveis(input.value)"
+                    placeholder="Global Search" />
+            </span>
+        </div>
+        <div class="p-d-flex p-ai-right">
+            <button pButton type="button" label="Cadastrar" routerLink='/cadastrar'></button>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="nome">Nome <p-sortIcon [field]="'nome'"></p-sortIcon>
+            </th>
+            <th pSortableColumn="email">email <p-sortIcon [field]="'email'"></p-sortIcon>
+            </th>
+            <th pSortableColumn="dataNascimento">dataNascimento <p-sortIcon [field]="'dataNascimento'"></p-sortIcon>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-responsavel>
+        <tr>
+            <th>{{responsavel.nome}}</th>
+            <th>{{responsavel.email}}</th>
+            <th>{{responsavel.dataNascimento}}</th>
+        </tr>
+    </ng-template>
+</p-table>

@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 public interface TarefaRepository extends JpaRepository<Tarefa,Long> {
 
     @Query(value = "select new com.basis.campina.xtarefas.domain.elasticsearch.TarefaDocument" +
-            "(t.id, t.nome , t.dataConclusao, t.dataInicio, t.status) from Tarefa t where (t.id = :id)")
+            "(t.id, t.nome , t.dataConclusao, t.dataInicio, t.status, t.responsavel.nome) from Tarefa t where (t.id = :id)")
     TarefaDocument getTarefa(@Param("id") Long id);
 
 }

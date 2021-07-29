@@ -18,7 +18,7 @@ spring:
     password: xtarefas
   liquibase:
     change-log: classpath:/config/liquibase/master.xml
-    drop-first: true
+    drop-first: false
 application:
   feign:
     url-documents: http://localhost:8081

@@ -11,7 +11,9 @@ import java.util.List;
 
 @Getter
 @Setter
-public class ResponsavelFilter extends DefaultFilter implements BaseFilter, Serializable {
+public class ResponsavelFilter extends DefaultFilter implements Serializable, BaseFilter {
+
+    private static final long serialVersionUID = 4964466971085562800L;
 
     public BoolQueryBuilder getFilter() {
         BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();

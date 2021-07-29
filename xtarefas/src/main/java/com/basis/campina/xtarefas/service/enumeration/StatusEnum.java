@@ -1,8 +1,17 @@
 package com.basis.campina.xtarefas.service.enumeration;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public enum StatusEnum {
-    EM_ADAMENTO,
-    CONCLUIDO,
-    SUSPENSO,
-    PARA_FAZER
+    EM_ANDAMENTO("Em andamento"),
+    CONCLUIDO("Concluido"),
+    SUSPENSO("Suspenso"),
+    PARA_FAZER("Para fazer");
+
+    private String value;
 }
