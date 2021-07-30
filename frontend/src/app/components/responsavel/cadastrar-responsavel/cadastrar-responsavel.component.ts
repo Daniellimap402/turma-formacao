@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { Responsavel } from './../../../domain/responsavel';
 import { ResponsavelService } from './../../../shared/services/responsavel.service';
 
@@ -12,14 +13,30 @@ export class CadastrarResponsavelComponent implements OnInit {
 
   responsavel: Responsavel = new Responsavel();
 
-  constructor(private responsavelService: ResponsavelService, private router: Router) { }
+  constructor(
+    private responsavelService: ResponsavelService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
+    this.buscarResponsavelRota();
   }
 
-  cadastrar(){    
-    this.responsavelService.salvar(this.responsavel).subscribe();
-    this.router.navigateByUrl('/responsaveis');
+  private buscarResponsavelRota() {
+    this.route.params.subscribe((params: Params) => {
+      const id = params.id;
+      const path = this.route.snapshot.routeConfig.path;
+      if (id) {
+        this.responsavelService.buscarPorId(id).subscribe(res => {
+          this.responsavel = res;
+        });
+      }
+    });
+  }
+
+  cadastrar() {
+    this.responsavelService.salvar(this.responsavel).pipe(finalize(() => this.router.navigateByUrl('/responsaveis'))).subscribe();
   }
 
 }

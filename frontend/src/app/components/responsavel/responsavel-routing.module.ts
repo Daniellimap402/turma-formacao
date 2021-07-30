@@ -5,7 +5,8 @@ import { ListarResponsavelComponent } from './listar-responsavel/listar-responsa
 
 const routes: Routes = [
   { path: '', component: ListarResponsavelComponent },
-  { path: 'cadastrar', component: CadastrarResponsavelComponent}
+  { path: 'cadastrar', component: CadastrarResponsavelComponent},
+  { path: 'cadastrar/:id', component: CadastrarResponsavelComponent}
 ];
 
 @NgModule({

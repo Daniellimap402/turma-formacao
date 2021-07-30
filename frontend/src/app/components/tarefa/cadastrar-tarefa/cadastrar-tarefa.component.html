@@ -1,0 +1,53 @@
+<div class="espacamento-padrao">
+    <input class="espacamento-input" type="text" pInputText [(ngModel)]="tarefa.nome" placeholder="nome" />
+</div>
+<div>
+    <div class="espacamento-padrao">
+        <input type="text" pInputText [(ngModel)]="tarefa.dataInicio" placeholder="data inicio" type="date"/>
+        <input type="text" pInputText [(ngModel)]="tarefa.dataConclusao" placeholder="data conclusao" type="date"/>
+    </div>
+</div>
+<div>
+    <p-dropdown class="espacamento-padrao" [options]="responsaveis" [(ngModel)]="responsavelSelecionado"
+        optionLabel="label" placeholder="Selecione o responsável">
+    </p-dropdown>
+    <p-dropdown class="espacamento-padrao" [options]="status" [(ngModel)]="tarefa.status"
+        placeholder="selecione a situação">
+    </p-dropdown>
+</div>
+<div class="espacamento-padrao">
+    <button pButton type="button" label="Adicionar Anexo" (click)="abrirModalAnexo()"></button>
+</div>
+<p-dialog header="Anexo" [(visible)]="exibirModalAnexo" [closable]="true" [dismissableMask]="true"
+    [style]="{width: '750px'}">
+    <div class="p-col-6">
+        <label for="nome">File: </label>
+        <div>
+            <input [(ngModel)]="anexo.file" type="text" pInputText>
+        </div>
+    </div>
+
+    <div class="p-col-6">
+        <label for="nome">Nome do arquivo: </label>
+        <div>
+            <input [(ngModel)]="anexo.fileName" type="text" pInputText>
+        </div>
+    </div>
+
+    <div class="p-col-12">
+        <div class="row-buttons">
+            <div class="button-left">
+                <button pButton icon="pi pi-times" type="button" (click)="fecharModalFormulario()" [label]="'Cancelar'"
+                    class="ui-button-rounded ui-button-danger button-cancelar"></button>
+            </div>
+            <div class="button-right">
+                <button pButton icon="pi pi-check" type="button" [label]="'Salvar'" (click)="adicionarAnexo()"
+                    class="ui-button-rounded ui-button-success button-success"></button>
+            </div>
+        </div>
+    </div>
+
+</p-dialog>
+<div class="espacamento-padrao">
+    <button pButton type="button" label="Cadastrar" (click)="cadastrar()"></button>
+</div>

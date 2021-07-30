@@ -4,6 +4,7 @@ import com.basis.campina.xtarefas.domain.Responsavel;
 import com.basis.campina.xtarefas.domain.elasticsearch.ResponsavelDocument;
 import com.basis.campina.xtarefas.repository.ResponsavelRepository;
 import com.basis.campina.xtarefas.repository.elastic.ResponsavelSearchRepository;
+import com.basis.campina.xtarefas.service.dto.DominioFixoDTO;
 import com.basis.campina.xtarefas.service.dto.ResponsavelDTO;
 import com.basis.campina.xtarefas.service.event.ResponsavelEvent;
 import com.basis.campina.xtarefas.service.filter.ResponsavelFilter;
@@ -12,8 +13,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -47,4 +51,7 @@ public class ResponsavelService {
         return searchRepository.search(filter.getFilter(), pageable);
     }
 
+    public List<DominioFixoDTO> buscarDominiosFixos() {
+        return this.repository.buscarDominiosFixos();
+    }
 }

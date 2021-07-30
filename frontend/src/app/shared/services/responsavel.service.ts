@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SelectItem } from 'primeng';
 import { Table } from 'primeng/table';
 import { Observable } from 'rxjs';
 import { RequestUtil } from '../util/request.util';
@@ -11,7 +12,7 @@ import { Page } from './../page';
     providedIn: 'root'
 })
 export class ResponsavelService {
-    path =  environment.apiUrl + '/responsaveis/';
+    path = environment.apiUrl + '/responsaveis/';
     constructor(private http: HttpClient) { }
 
     listarResponsaveis(query: string, tabela: Table): Observable<Page<Responsavel>> {
@@ -19,13 +20,21 @@ export class ResponsavelService {
             params: RequestUtil.getRequestParamsTable(tabela)
         });
     }
-    
+
     salvar(responsavel: Responsavel): Observable<any> {
         return this.http.post(this.path, responsavel);
     }
 
-    remover(id: number): Observable<any>{
+    remover(id: number): Observable<any> {
         return this.http.delete(`${this.path}/${id}`);
+    }
+
+    buscarDominiosFixos(): Observable<SelectItem[]> {
+        return this.http.get<SelectItem[]>(`${this.path}/dominios-fixos`);
+    }
+
+    buscarPorId(id: number): Observable<Responsavel> {
+        return this.http.get<Responsavel>(`${this.path}/${id}`);
     }
 
 }

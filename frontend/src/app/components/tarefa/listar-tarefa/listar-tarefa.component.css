@@ -1,0 +1,10 @@
+.botao{
+    color: black !important;
+    background-color: white !important;
+}
+.espacamento-botao{
+    padding: 20px !important;
+}
+.margin-botao{
+    margin: 10px;
+}

@@ -1,0 +1,12 @@
+.espacamento-padrao{
+    padding: 10px;
+}
+
+.espacamento-input{
+    min-width: 400px !important;
+    margin-right: 50px !important;
+}
+
+.espacamento-data{
+    padding-right: 25px;
+}

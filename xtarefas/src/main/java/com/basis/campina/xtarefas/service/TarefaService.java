@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -32,8 +33,6 @@ public class TarefaService {
 
     private final ApplicationEventPublisher eventPublisher;
 
-    private final ElasticSearchService elasticSearchService;
-
     private final TarefaSearchRepository searchRepository;
 
     public TarefaDTO salvar(TarefaDTO dto){
@@ -44,10 +43,12 @@ public class TarefaService {
     }
 
     private void setUuIdAnexos(TarefaDTO dto) {
-        dto.getAnexos().stream().forEach(anexoDTO -> {
-            anexoDTO.setUuId(UUID.randomUUID().toString());
-            client.salvar(anexoDTO);
-        });
+        if(Objects.nonNull(dto.getAnexos())){
+            dto.getAnexos().stream().forEach(anexoDTO -> {
+                anexoDTO.setUuId(UUID.randomUUID().toString());
+                client.salvar(anexoDTO);
+            });
+        }
     }
 
     public TarefaDTO buscarPorId(Long id){
@@ -55,6 +56,10 @@ public class TarefaService {
     }
 
     public void deletar(Long id){
+        Tarefa tarefa = this.repository.getById(id);
+        tarefa.getAnexos().stream().forEach(anexo -> {
+            client.remover(anexo.getUuId());
+        });
         this.repository.deleteById(id);
         this.searchRepository.deleteById(id);
     }

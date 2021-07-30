@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Table } from 'primeng/table';
+import { finalize } from 'rxjs/operators';
 import { Page } from 'src/app/shared/page';
 import { Tarefa } from './../../../domain/tarefa';
 import { TarefaService } from './../../../shared/services/tarefa.service';
@@ -15,7 +17,7 @@ export class ListarTarefaComponent implements OnInit {
   @ViewChild('tabela') tabela: Table;
   query = '';
 
-  constructor(private service: TarefaService) { }
+  constructor(private service: TarefaService, private router: Router) { }
 
   ngOnInit(): void {
     this.buscarTarefas(this.query);
@@ -27,6 +29,18 @@ export class ListarTarefaComponent implements OnInit {
       this.tarefas = res;
     });
 
+  }
+
+  navegarRotaCadastrar() {
+    this.router.navigate(['/tarefas/cadastrar']);
+  }
+
+  remover(id: number) {
+    this.service.remover(id).pipe(finalize(() => this.buscarTarefas(this.query))).subscribe();
+  }
+
+  editar(id: number) {
+    this.router.navigateByUrl('/tarefas/cadastrar/' + id);
   }
 
 }

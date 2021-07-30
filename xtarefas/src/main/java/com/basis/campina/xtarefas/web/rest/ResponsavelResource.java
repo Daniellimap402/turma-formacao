@@ -2,6 +2,7 @@ package com.basis.campina.xtarefas.web.rest;
 
 import com.basis.campina.xtarefas.domain.elasticsearch.ResponsavelDocument;
 import com.basis.campina.xtarefas.service.ResponsavelService;
+import com.basis.campina.xtarefas.service.dto.DominioFixoDTO;
 import com.basis.campina.xtarefas.service.dto.ResponsavelDTO;
 import com.basis.campina.xtarefas.service.filter.ResponsavelFilter;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 @RestController
@@ -45,6 +48,11 @@ public class ResponsavelResource {
     public ResponseEntity<Page<ResponsavelDocument>> search(@RequestBody ResponsavelFilter filter, Pageable pageable) {
         Page<ResponsavelDocument> documents = service.search(filter, pageable);
         return ResponseEntity.ok(documents);
+    }
+
+    @GetMapping("/dominios-fixos")
+    public ResponseEntity<List<DominioFixoDTO>> buscarDominiosFixos() {
+        return ResponseEntity.ok(service.buscarDominiosFixos());
     }
 
 }

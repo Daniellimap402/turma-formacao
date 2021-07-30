@@ -40,4 +40,8 @@ export class ListarResponsavelComponent implements OnInit {
     this.service.remover(id).pipe(finalize(() => this.buscarResponsaveis(this.query))).subscribe();
   }
 
+  editar(id: number) {
+    this.router.navigateByUrl('responsaveis/cadastrar/' + id);
+  }
+
 }

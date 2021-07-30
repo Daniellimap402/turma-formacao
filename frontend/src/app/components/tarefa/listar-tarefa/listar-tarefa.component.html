@@ -1,4 +1,4 @@
-<p-table [value]="tarefas.content" #tabela (onLazyLoad)="buscarResponsaveis(query)" [lazy]="true" dataKey="id"
+<p-table [value]="tarefas.content" #tabela (onLazyLoad)="buscarTarefas(query)" [lazy]="true" dataKey="id"
     [rowHover]="true" [rows]="10"
     currentPageReportTemplate="Showing {first} to {{tarefas.numberOfElements}} of {totalRecords} entries"
     [showCurrentPageReport]="true" [paginator]="true" [totalRecords]="tarefas.totalElements"
@@ -6,12 +6,15 @@
     <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
             <h5 class="p-m-0">Tarefas</h5>
-            <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" #input (keydown.enter)="buscarResponsaveis(input.value)"
-                    placeholder="Global Search" />
-            </span>
         </div>
+        <div class="espacamento-botao">
+            <button class="botao" pButton type="button" label="Cadastrar" (click)="navegarRotaCadastrar()"></button>
+        </div>
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" #input (keydown.enter)="buscarTarefas(input.value)"
+                placeholder="Pesquisa Global" />
+        </span>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
@@ -27,6 +30,9 @@
             </th>
             <th pSortableColumn="nomeResponsavel">Nome Responsavel <p-sortIcon [field]="'nomeResponsavel'"></p-sortIcon>
             </th>
+            <th>
+                Ações
+            </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-tarefa>
@@ -37,6 +43,10 @@
             <th>{{tarefa.status}}</th>
             <th>{{tarefa.nomeAnexos}}</th>
             <th>{{tarefa.nomeResponsavel}}</th>
+            <th>
+                <button class="margin-botao" pButton type="button" label="Editar" (click)="editar(tarefa.id)"></button>
+                <button class="margin-botao" pButton type="button" label="Remover" (click)="remover(tarefa.id)"></button>
+            </th>
         </tr>
     </ng-template>
 </p-table>

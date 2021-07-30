@@ -1,12 +1,10 @@
-<div>
-    <input type="text" pInputText [(ngModel)]="responsavel.email" />
-    <input type="text" pInputText [(ngModel)]="responsavel.nome" />
+<div class="espacamento-padrao">
+    <input class="texto-nome" type="text" pInputText [(ngModel)]="responsavel.nome" placeholder="nome" />
+    <input class="texto-email" type="text" pInputText [(ngModel)]="responsavel.email" placeholder="email" type="email"/>
 </div>
-<div>
+<div class="espacamento-padrao">
+    <input class="texto-nascimento" type="text" pInputText [(ngModel)]="responsavel.dataNascimento" placeholder="data nascimento" type="date"/>
 </div>
-<div>
-    <input type="text" pInputText [(ngModel)]="responsavel.dataNascimento" />
-</div>
-<div>
+<div class="espacamento-padrao">
     <button pButton type="button" label="Cadastrar" (click)="cadastrar()"></button>
 </div>

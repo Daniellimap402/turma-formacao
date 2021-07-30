@@ -6,15 +6,15 @@
     <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
             <h5 class="p-m-0">Responsaveis</h5>
-            <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" #input (keydown.enter)="buscarResponsaveis(input.value)"
-                    placeholder="Global Search" />
-            </span>
         </div>
-        <div class="p-d-flex p-ai-right">
-            <button pButton type="button" label="Cadastrar" (click)="navegarRotaCadastrar()"></button>
+        <div class="espacamento-botao">
+            <button class="botao" pButton type="button" label="Cadastrar" (click)="navegarRotaCadastrar()"></button>
         </div>
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" #input (keydown.enter)="buscarResponsaveis(input.value)"
+                placeholder="Pesquisa Global" />
+        </span>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
@@ -24,7 +24,7 @@
             </th>
             <th pSortableColumn="dataNascimento">dataNascimento <p-sortIcon [field]="'dataNascimento'"></p-sortIcon>
             </th>
-            <th pSortableColumn="dataNascimento">Ações <p-sortIcon [field]="'dataNascimento'"></p-sortIcon>
+            <th>Ações
             </th>
         </tr>
     </ng-template>
@@ -34,7 +34,10 @@
             <th>{{responsavel.email}}</th>
             <th>{{responsavel.dataNascimento}}</th>
             <th>
-                <button pButton type="button" label="Remover" (click)="remover(responsavel.id)"></button>
+                <button class="margin-botao" pButton type="button" label="Editar"
+                    (click)="editar(responsavel.id)"></button>
+                <button class="margin-botao" pButton type="button" label="Remover"
+                    (click)="remover(responsavel.id)"></button>
             </th>
         </tr>
     </ng-template>

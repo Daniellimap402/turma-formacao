@@ -20,4 +20,16 @@ export class TarefaService {
         });
     }
 
+    cadastrar(tarefa: Tarefa): Observable<any> {
+        return this.http.post<any>(this.path, tarefa);
+    }
+
+    remover(id: number): Observable<any> {
+        return this.http.delete<any>(this.path + id);
+    }
+
+    buscarPorId(id: number): Observable<Tarefa> {
+        return this.http.get<Tarefa>(this.path + id);
+    }
+
 }
