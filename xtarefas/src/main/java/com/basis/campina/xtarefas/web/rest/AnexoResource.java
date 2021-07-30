@@ -38,14 +38,9 @@ public class AnexoResource {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/buscar")
+    @GetMapping()
     public ResponseEntity<AnexoDTO> buscar(@RequestParam("uuId") String uuId) {
         return this.service.buscar(uuId);
-    }
-
-    @GetMapping("/listar")
-    public ResponseEntity<Page<AnexoDTO>> listar() {
-        return null;
     }
 
 }

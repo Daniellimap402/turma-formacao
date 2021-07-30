@@ -40,6 +40,7 @@ public class ResponsavelService {
 
     public void deletar(Long id){
         this.repository.deleteById(id);
+        this.searchRepository.deleteById(id);
     }
 
     public Page<ResponsavelDocument> search(ResponsavelFilter filter, Pageable pageable){

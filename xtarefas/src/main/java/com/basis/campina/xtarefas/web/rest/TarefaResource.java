@@ -34,7 +34,7 @@ public class TarefaResource {
         return ResponseEntity.ok(this.service.buscarPorId(id));
     }
 
-    @DeleteMapping("/deletar/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         this.service.deletar(id);
         return ResponseEntity.ok().build();

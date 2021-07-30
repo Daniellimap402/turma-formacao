@@ -1,1 +1,12 @@
-<p>cadastrar-responsavel works!</p>
+<div>
+    <input type="text" pInputText [(ngModel)]="responsavel.email" />
+    <input type="text" pInputText [(ngModel)]="responsavel.nome" />
+</div>
+<div>
+</div>
+<div>
+    <input type="text" pInputText [(ngModel)]="responsavel.dataNascimento" />
+</div>
+<div>
+    <button pButton type="button" label="Cadastrar" (click)="cadastrar()"></button>
+</div>

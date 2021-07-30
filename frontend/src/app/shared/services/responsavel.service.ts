@@ -19,5 +19,13 @@ export class ResponsavelService {
             params: RequestUtil.getRequestParamsTable(tabela)
         });
     }
+    
+    salvar(responsavel: Responsavel): Observable<any> {
+        return this.http.post(this.path, responsavel);
+    }
+
+    remover(id: number): Observable<any>{
+        return this.http.delete(`${this.path}/${id}`);
+    }
 
 }

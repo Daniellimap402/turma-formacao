@@ -1,13 +1,13 @@
 package com.basis.campina.xtarefas.resource;
 
 import com.basis.campina.xtarefas.config.containers.ContainersFactory;
-import com.basis.campina.xtarefas.domain.Responsavel;
-import com.basis.campina.xtarefas.service.dto.ResponsavelDTO;
+import com.basis.campina.xtarefas.domain.Tarefa;
+import com.basis.campina.xtarefas.service.dto.TarefaDTO;
 import com.basis.campina.xtarefas.service.elastic.ElasticSearchService;
-import com.basis.campina.xtarefas.service.event.ResponsavelEvent;
-import com.basis.campina.xtarefas.service.filter.ResponsavelFilter;
+import com.basis.campina.xtarefas.service.event.TarefaEvent;
+import com.basis.campina.xtarefas.service.filter.TarefaFilter;
 import com.basis.campina.xtarefas.test.IntTestComum;
-import com.basis.campina.xtarefas.test.build.ResponsavelBuilder;
+import com.basis.campina.xtarefas.test.build.TarefaBuilder;
 import com.basis.campina.xtarefas.util.TestUtil;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -29,66 +29,65 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 @ExtendWith(SpringExtension.class)
 @Testcontainers
-public class ResponsavelResourceIT extends IntTestComum {
+public class TarefaResourceIT extends IntTestComum {
 
-    private final static String URL = "/api/responsaveis/";
+    private final static String URL = "/api/tarefas/";
     private final static String ID = URL + "{id}";
-    private final static String SEARCH_RESPONSAVEIS = URL+"search";
+    private final static String SEARCH_TAREFAS = URL+"search";
 
     @Autowired
-    private ResponsavelBuilder builder;
-
-    @Autowired
-    private ElasticSearchService searchService;
+    private TarefaBuilder builder;
 
     @Container
     private static ContainersFactory containersFactory = ContainersFactory.getInstance();
 
+    @Autowired
+    private ElasticSearchService searchService;
+
     @Test
-    @DisplayName("Criar responsavel com sucesso")
-    public void criarResponsavelComSucesso() throws Exception {
-        ResponsavelDTO responsavel = builder.construirDto();
+    @DisplayName("Criar tarefa com sucesso")
+    public void criarTarefaComSucesso() throws Exception {
+        TarefaDTO tarefa = builder.construirDto();
 
         getMockMvc().perform(post(URL)
                         .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                        .content(TestUtil.convertObjectToJsonBytes(responsavel)))
+                        .content(TestUtil.convertObjectToJsonBytes(tarefa)))
                 .andExpect(status().isOk());
     }
 
     @Test
-    @DisplayName("Buscar responsavel com sucesso")
-    public void buscarResponsavelComSucesso() throws Exception {
-        Responsavel responsavel = builder.construir();
+    @DisplayName("Buscar Tarefa com sucesso")
+    public void buscarTarefaComSucesso() throws Exception {
+        Tarefa tarefa = builder.construir();
 
-        getMockMvc().perform(get(ID, responsavel.getId())
+        getMockMvc().perform(get(ID, tarefa.getId())
                         .contentType(TestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk());
     }
 
     @Test
-    @DisplayName("remover responsavel com sucesso")
-    public void removerResponsavelComSucesso() throws Exception {
-        this.searchService.reindex();
-        Responsavel responsavel = builder.construir();
+    @DisplayName("Remover tarefa com sucesso")
+    public void removerTarefaComSucesso() throws Exception {
+        Tarefa tarefa = builder.construir();
 
-        getMockMvc().perform(delete(ID, responsavel.getId())
+        getMockMvc().perform(delete(ID, tarefa.getId())
                         .contentType(TestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk());
     }
 
     @Test
     @Transactional
-    @DisplayName("Listar Responsável com sucesso")
-    public void listarResponsaveis() throws Exception {
-        Responsavel responsavel= this.builder.construir();
-
+    @DisplayName("Listar Tarefa com sucesso")
+    public void listarTarefas() throws Exception {
         this.searchService.reindex();
-        new ResponsavelEvent(responsavel.getId());
+        Tarefa tarefa= this.builder.construir();
 
-        ResponsavelFilter filtro = new ResponsavelFilter();
-        filtro.setQuery(responsavel.getNome());
+        new TarefaEvent(tarefa.getId());
 
-        getMockMvc().perform(post(SEARCH_RESPONSAVEIS).contentType(TestUtil.APPLICATION_JSON_UTF8)
+        TarefaFilter filtro = new TarefaFilter();
+        filtro.setQuery(tarefa.getNome());
+
+        getMockMvc().perform(post(SEARCH_TAREFAS).contentType(TestUtil.APPLICATION_JSON_UTF8)
                         .content(TestUtil.convertObjectToJsonBytes(filtro)))
                 .andExpect(status().isOk());
     }

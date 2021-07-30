@@ -5,6 +5,7 @@ import com.basis.campina.xtarefas.domain.elasticsearch.TarefaDocument;
 import com.basis.campina.xtarefas.repository.TarefaRepository;
 import com.basis.campina.xtarefas.repository.elastic.TarefaSearchRepository;
 import com.basis.campina.xtarefas.service.dto.TarefaDTO;
+import com.basis.campina.xtarefas.service.elastic.ElasticSearchService;
 import com.basis.campina.xtarefas.service.event.TarefaEvent;
 import com.basis.campina.xtarefas.service.feign.DocumentClient;
 import com.basis.campina.xtarefas.service.filter.TarefaFilter;
@@ -31,6 +32,8 @@ public class TarefaService {
 
     private final ApplicationEventPublisher eventPublisher;
 
+    private final ElasticSearchService elasticSearchService;
+
     private final TarefaSearchRepository searchRepository;
 
     public TarefaDTO salvar(TarefaDTO dto){
@@ -53,6 +56,7 @@ public class TarefaService {
 
     public void deletar(Long id){
         this.repository.deleteById(id);
+        this.searchRepository.deleteById(id);
     }
 
     public Page<TarefaDocument> search(TarefaFilter filter, Pageable pageable) {

@@ -13,7 +13,7 @@
             </span>
         </div>
         <div class="p-d-flex p-ai-right">
-            <button pButton type="button" label="Cadastrar" routerLink='/cadastrar'></button>
+            <button pButton type="button" label="Cadastrar" (click)="navegarRotaCadastrar()"></button>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -24,6 +24,8 @@
             </th>
             <th pSortableColumn="dataNascimento">dataNascimento <p-sortIcon [field]="'dataNascimento'"></p-sortIcon>
             </th>
+            <th pSortableColumn="dataNascimento">Ações <p-sortIcon [field]="'dataNascimento'"></p-sortIcon>
+            </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-responsavel>
@@ -31,6 +33,9 @@
             <th>{{responsavel.nome}}</th>
             <th>{{responsavel.email}}</th>
             <th>{{responsavel.dataNascimento}}</th>
+            <th>
+                <button pButton type="button" label="Remover" (click)="remover(responsavel.id)"></button>
+            </th>
         </tr>
     </ng-template>
 </p-table>
